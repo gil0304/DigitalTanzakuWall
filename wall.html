@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Tanzaku Wall</title>
+    <script type="module" src="/src/wall/main.ts"></script>
+  </head>
+  <body class="wall-body">
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <svg id="decor" aria-hidden="true"></svg>
+    <div id="layer-bg" class="tanzaku-layer" aria-hidden="true"></div>
+    <div id="layer-fg" class="tanzaku-layer"></div>
+
+    <p id="hint" class="hint" hidden>
+      スマホから願いごとを投稿すると、<br />ここに短冊が飾られます
+    </p>
+  </body>
+</html>

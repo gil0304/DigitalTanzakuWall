@@ -1,0 +1,31 @@
+/* 短冊カラー(投稿画面のスウォッチと表示画面の短冊で共用) */
+.tz-red {
+  --paper-a: #e8626d;
+  --paper-b: #cf4053;
+  --ink: #fff6f1;
+}
+.tz-blue {
+  --paper-a: #5583d8;
+  --paper-b: #3a63b8;
+  --ink: #f3f8ff;
+}
+.tz-yellow {
+  --paper-a: #f2d16d;
+  --paper-b: #e3b44a;
+  --ink: #5a4415;
+}
+.tz-purple {
+  --paper-a: #9a6fce;
+  --paper-b: #7a4fb3;
+  --ink: #f9f4ff;
+}
+.tz-green {
+  --paper-a: #5cab72;
+  --paper-b: #3f8f57;
+  --ink: #f1fff5;
+}
+.tz-white {
+  --paper-a: #f8f5ec;
+  --paper-b: #e6dfcd;
+  --ink: #4d4536;
+}

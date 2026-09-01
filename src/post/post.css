@@ -1,0 +1,416 @@
+@import '../styles/tanzaku-colors.css';
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy-deep: #070b20;
+  --navy: #0d1434;
+  --navy-light: #17204d;
+  --gold: #d9b45a;
+  --gold-soft: #e8cf8f;
+  --text: #f2f3f8;
+  --text-dim: #a8adc4;
+}
+
+body.post-body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP',
+    system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(217, 180, 90, 0.14), transparent 34%),
+    radial-gradient(circle at 12% 30%, rgba(120, 140, 255, 0.12), transparent 40%),
+    linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 55%, #1a1440 100%);
+  background-attachment: fixed;
+}
+
+/* 小さな星 */
+body.post-body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, rgba(255, 255, 255, 0.8), transparent 100%),
+    radial-gradient(1px 1px at 32% 8%, rgba(255, 240, 200, 0.7), transparent 100%),
+    radial-gradient(1.4px 1.4px at 55% 22%, rgba(255, 255, 255, 0.6), transparent 100%),
+    radial-gradient(1px 1px at 71% 6%, rgba(200, 220, 255, 0.8), transparent 100%),
+    radial-gradient(1.2px 1.2px at 88% 28%, rgba(255, 255, 255, 0.55), transparent 100%),
+    radial-gradient(1px 1px at 44% 40%, rgba(255, 255, 255, 0.4), transparent 100%),
+    radial-gradient(1.3px 1.3px at 8% 55%, rgba(255, 240, 200, 0.5), transparent 100%),
+    radial-gradient(1px 1px at 93% 60%, rgba(200, 220, 255, 0.5), transparent 100%);
+}
+
+.post-page {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 28px 18px 48px;
+}
+
+.post-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.post-header-icon {
+  font-size: 40px;
+  margin: 0 0 6px;
+}
+
+.post-header h1 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--gold-soft);
+}
+
+.post-header-sub {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(232, 207, 143, 0.18);
+  border-radius: 16px;
+  padding: 22px 18px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label,
+.field legend {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  margin-left: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-dim);
+  vertical-align: 2px;
+}
+
+.badge-required {
+  background: rgba(224, 90, 105, 0.25);
+  color: #ffb9c2;
+}
+
+textarea,
+input[type='text'] {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(7, 11, 32, 0.55);
+  color: var(--text);
+  font-size: 16px; /* iOSのズーム防止のため16px以上 */
+  font-family: inherit;
+  padding: 12px 14px;
+  line-height: 1.6;
+  resize: none;
+}
+
+textarea:focus,
+input[type='text']:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(217, 180, 90, 0.18);
+}
+
+input[type='text']:disabled {
+  opacity: 0.45;
+}
+
+.char-counter {
+  margin: 6px 2px 0;
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.char-counter.is-full {
+  color: #ffb9c2;
+}
+
+/* 匿名トグル */
+.field label.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.toggle-track {
+  flex: none;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+.toggle input:checked + .toggle-track {
+  background: var(--gold);
+}
+
+.toggle input:checked + .toggle-track::after {
+  transform: translateX(18px);
+}
+
+.toggle input:focus-visible + .toggle-track {
+  box-shadow: 0 0 0 3px rgba(217, 180, 90, 0.35);
+}
+
+/* 短冊カラー選択 */
+.colors-field {
+  border: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.color-opt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.color-opt input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.swatch {
+  display: block;
+  width: 34px;
+  height: 56px;
+  border-radius: 4px;
+  background: linear-gradient(170deg, var(--paper-a), var(--paper-b));
+  border: 2px solid transparent;
+  position: relative;
+  transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+/* 短冊の穴 */
+.swatch::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(10, 15, 44, 0.55);
+}
+
+.swatch-random {
+  background: conic-gradient(
+    #e8626d,
+    #f2d16d,
+    #5cab72,
+    #5583d8,
+    #9a6fce,
+    #f8f5ec,
+    #e8626d
+  );
+}
+
+.color-opt input:checked + .swatch {
+  border-color: var(--gold-soft);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45), 0 0 12px rgba(232, 207, 143, 0.35);
+}
+
+.color-opt input:focus-visible + .swatch {
+  box-shadow: 0 0 0 3px rgba(217, 180, 90, 0.4);
+}
+
+.color-name {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.color-opt input:checked ~ .color-name {
+  color: var(--gold-soft);
+}
+
+.form-error {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(224, 90, 105, 0.16);
+  border: 1px solid rgba(224, 90, 105, 0.4);
+  color: #ffc4cc;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  color: #241a05;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+.submit-btn:disabled {
+  filter: grayscale(0.5) brightness(0.75);
+  cursor: default;
+}
+
+/* 投稿完了 */
+.done-panel {
+  text-align: center;
+}
+
+.done-panel h2 {
+  margin: 18px 0 0;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: var(--gold-soft);
+}
+
+.done-sub {
+  margin: 10px 0 24px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.done-tanzaku-area {
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.done-tanzaku {
+  position: relative;
+  width: 76px;
+  height: 200px;
+  border-radius: 5px;
+  background: linear-gradient(170deg, var(--paper-a), var(--paper-b));
+  color: var(--ink);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 26px 8px 14px;
+  animation: done-sway 3.4s ease-in-out infinite alternate;
+  transform-origin: top center;
+}
+
+.done-string {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: var(--gold-soft);
+  transform: translateX(-50%);
+}
+
+.done-hole {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(10, 15, 44, 0.5);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.done-wish {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  max-height: 160px;
+  overflow: hidden;
+}
+
+@keyframes done-sway {
+  from {
+    transform: rotate(-2.4deg);
+  }
+  to {
+    transform: rotate(2.4deg);
+  }
+}
+
+.post-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.post-footer p {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}

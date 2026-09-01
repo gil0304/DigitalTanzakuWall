@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0f2c" />
+    <title>願いごとを書く | Digital Tanzaku Wall</title>
+    <script type="module" src="/src/post/main.ts"></script>
+  </head>
+  <body class="post-body">
+    <main class="post-page">
+      <header class="post-header">
+        <p class="post-header-icon">🎋</p>
+        <h1>七夕の願いごと</h1>
+        <p class="post-header-sub">願いを書いて、会場の笹に飾ろう</p>
+      </header>
+
+      <form id="wish-form" class="card" novalidate>
+        <div class="field">
+          <label for="wish">
+            願いごと <span class="badge badge-required">必須</span>
+          </label>
+          <textarea
+            id="wish"
+            rows="2"
+            maxlength="40"
+            placeholder="例:家族みんなが健康でありますように"
+            autocomplete="off"
+          ></textarea>
+          <p class="char-counter"><span id="wish-count">0</span> / 40</p>
+        </div>
+
+        <div class="field">
+          <label for="name">
+            名前 <span class="badge">任意</span>
+          </label>
+          <input
+            id="name"
+            type="text"
+            maxlength="12"
+            placeholder="未入力なら「匿名」になります"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field">
+          <label class="toggle">
+            <input type="checkbox" id="anonymous" />
+            <span class="toggle-track" aria-hidden="true"></span>
+            <span>匿名で投稿する(名前を表示しない)</span>
+          </label>
+        </div>
+
+        <fieldset class="field colors-field">
+          <legend>短冊の色</legend>
+          <div class="color-grid" id="color-grid">
+            <label class="color-opt">
+              <input type="radio" name="color" value="random" checked />
+              <span class="swatch swatch-random" aria-hidden="true"></span>
+              <span class="color-name">おまかせ</span>
+            </label>
+            <label class="color-opt">
+              <input type="radio" name="color" value="red" />
+              <span class="swatch tz-red" aria-hidden="true"></span>
+              <span class="color-name">赤</span>
+            </label>
+            <label class="color-opt">
+              <input type="radio" name="color" value="blue" />
+              <span class="swatch tz-blue" aria-hidden="true"></span>
+              <span class="color-name">青</span>
+            </label>
+            <label class="color-opt">
+              <input type="radio" name="color" value="yellow" />
+              <span class="swatch tz-yellow" aria-hidden="true"></span>
+              <span class="color-name">黄</span>
+            </label>
+            <label class="color-opt">
+              <input type="radio" name="color" value="purple" />
+              <span class="swatch tz-purple" aria-hidden="true"></span>
+              <span class="color-name">紫</span>
+            </label>
+            <label class="color-opt">
+              <input type="radio" name="color" value="green" />
+              <span class="swatch tz-green" aria-hidden="true"></span>
+              <span class="color-name">緑</span>
+            </label>
+            <label class="color-opt">
+              <input type="radio" name="color" value="white" />
+              <span class="swatch tz-white" aria-hidden="true"></span>
+              <span class="color-name">白</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <p id="form-error" class="form-error" hidden></p>
+
+        <button type="submit" id="submit-btn" class="submit-btn">短冊を飾る</button>
+      </form>
+
+      <section id="done-panel" class="card done-panel" hidden>
+        <div class="done-tanzaku-area">
+          <div id="done-tanzaku" class="done-tanzaku">
+            <span class="done-string" aria-hidden="true"></span>
+            <span class="done-hole" aria-hidden="true"></span>
+            <span id="done-wish" class="done-wish"></span>
+          </div>
+        </div>
+        <h2>投稿しました 🎋</h2>
+        <p class="done-sub">大画面に短冊が表示されます</p>
+        <button type="button" id="again-btn" class="submit-btn">もう一枚書く</button>
+      </section>
+
+      <footer class="post-footer">
+        <p id="mode-note" hidden>
+          ローカルデモモードで動作中(Supabase未設定・同じブラウザ内でのみ共有されます)
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>
